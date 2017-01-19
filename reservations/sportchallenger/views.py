@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 import datetime
-from sportchallenger.forms import LoginForm, MonthForm, ReservationForm, NewUserForm, NewUserForm2
+from sportchallenger.forms import LoginForm, MonthForm, ReservationForm, NewUserForm
 from sportchallenger.models import Reservation, SportFacility, KINDS, SPORTS, MyUser
 # Create your views here.
 
@@ -156,10 +156,26 @@ class UserDetailsView(View):
 
 class AddUserView(View):
     def get(self, request):
-        base_form = NewUserForm
-        extended_form = NewUserForm2
+        base_form = NewUserForm()
         ctx = {
             'base_form': base_form,
-            'extended_form': extended_form
         }
         return render(request, "sportchallenger/newuser_form.html", ctx)
+
+    def post(self, request):
+        form = NewUserForm(request.POST, request.FILES)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+            nickname = form.cleaned_data['nickname']
+            photo = form.cleaned_data['photo']
+            u = User.objects.create_user(username=username, password=password, email = email)
+            u.save()
+            mu = MyUser.objects.create(user=User.objects.get(username=u.username), nickname=nickname, photo = photo)
+            mu.save()
+        else:
+            return HttpResponse('form is invalid')
+        return render(request, "sportchallenger/thanks_user.html")
+
+

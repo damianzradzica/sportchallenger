@@ -44,12 +44,28 @@ class ReservationForm(forms.Form):
     )
 
 class NewUserForm(forms.Form):
-    pass
-    # username =
-    # password =
-    # email =
-
-class NewUserForm2(forms.ModelForm):
-    class Meta:
-        model = MyUser
-        fields = ['nickname', 'photo']
+    username = forms.CharField(
+        label='nazwa użytkownika',
+        max_length=64,
+        widget=forms.TextInput,
+        required=True,
+    )
+    password = forms.CharField(
+        label='hasło',
+        max_length=64,
+        widget=forms.PasswordInput,
+        required=True,
+    )
+    email =forms.CharField(
+        max_length=64,
+        widget=forms.EmailInput,
+        required=True,
+    )
+    nickname = forms.CharField(
+        max_length=64,
+        widget=forms.TextInput,
+        required=True,
+    )
+    photo = forms.FileField(
+        label='zdjęcie'
+    )

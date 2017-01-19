@@ -13,15 +13,9 @@
 
             <p><b> </b></p>
             <div> INFORMACJE PODSTAWOWE
-                <form method="post">
+                <form method="post" enctype='multipart/form-data'>
                     {% csrf_token %}
                     {{ base_form.as_p }}
-                </form>
-            </div>
-            <div> INFORMACJE DODATKOWE
-                <form method="post">
-                    {% csrf_token %}
-                    {{ extended_form.as_p }}
                     <input type="submit" value="Załóż konto">
                 </form>
             </div>
