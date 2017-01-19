@@ -1,0 +1,20 @@
+{% extends 'sportchallenger/base.html' %}
+
+{% block content %}
+    <h1> {{ facility.name }} </h1>
+    <div> <img src = '/{{ photo }}'> </div>
+    <p>ADRES: {{ facility.city }}, {{ facility.street }} </p>
+    <p>RODZAJ OBIEKTU: {{ kind }} </p>
+    <p>DYSCYPLINY: {{ sports }} </p>
+    <p>OPIS: {{ facility.description }} </p>
+    <p>CENA: {{ facility.price }} ZŁ / GODZ. </p>
+
+    <form action = '' method = 'POST'>
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value = 'SPRAWDŹ DOSTĘPNOŚĆ'>
+    </form>
+
+{% endblock %}
+
+{% block title %} Szczegóły obiektu {% endblock %}

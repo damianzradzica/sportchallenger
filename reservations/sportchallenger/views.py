@@ -1,0 +1,165 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.urls import reverse_lazy
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import CreateView
+from django.views.generic import DeleteView
+from django.views.generic import FormView
+from django.views.generic import UpdateView
+from django.contrib.auth import authenticate, login, logout
+from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
+import datetime
+from sportchallenger.forms import LoginForm, MonthForm, ReservationForm, NewUserForm, NewUserForm2
+from sportchallenger.models import Reservation, SportFacility, KINDS, SPORTS, MyUser
+# Create your views here.
+
+
+
+class LoginView(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, "sportchallenger/login.html", {"form": form})
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():  # dopiero jak zrobimy walidację to utworzy się słownik cleaned_data
+            u = form.cleaned_data['username']
+            p = form.cleaned_data['password']
+            user = authenticate(username=u, password=p)
+
+        if user is not None:
+            login(request, user)
+            return redirect('main_page')
+        else:
+            raise ValidationError('Błędny login lub hasło')
+
+class MainView(View):
+    def get(self, request):
+        facilities = SportFacility.objects.all()
+        list = []
+        user = request.user
+        for a in facilities:
+            d = dict()
+            d['id'] = a.id
+            d['name'] = a.name
+            d['photos'] = a.photos
+            d['kind'] = dict(KINDS).get(a.kind)
+            d['city'] = a.city
+            d['street'] = a.street
+            d['price'] = a.price
+            list.append(d)
+
+        return render(request, "sportchallenger/main_page.html", {'facility': list,
+                                                                  'user': user })
+
+class FacilityView(View):
+    def get(self, request, pk):
+        facility = SportFacility.objects.get(id = pk)
+        form = MonthForm()
+        ctx = {
+            'facility': facility,
+            'kind': dict(KINDS).get(facility.kind),
+            'sports': dict(SPORTS).get(facility.sports),
+            'photo': facility.photos,
+            'form': form
+        }
+        return render(request, 'sportchallenger/facility_details.html', ctx)
+    def post(self, request, pk):
+        facility = SportFacility.objects.get(id=pk)
+        form = MonthForm(request.POST)
+        if form.is_valid():
+            month_info = int(form.cleaned_data['month'])
+            year = form.cleaned_data['year']
+
+        long_months = (1, 3, 5, 7, 8, 10, 12)
+        short_months = (4, 6, 9, 11)
+
+        if month_info in long_months:
+            days = 31
+        elif month_info in short_months:
+            days = 30
+        elif month_info ==2:
+            days = 28
+
+        counter = 1
+        list = []
+        first_day = datetime.date(year, month_info, 1)
+        list.append(first_day)
+
+        while counter < days:
+            base = first_day + datetime.timedelta(days = 1)
+            list.append(base)
+            first_day += datetime.timedelta(days = 1)
+            counter += 1
+
+        ctx = {
+            'year': year,
+            'days': days,
+            'month': month_info,
+            'list': list,
+            'facility': facility
+        }
+
+        return render(request, 'sportchallenger/2calendar.html', ctx)
+
+
+class ReservationView(View):
+    def get(self, request, pk, ryear, rmonth, rday):
+        facility_form = SportFacility.objects.get(id = pk).name
+        user = request.user.username
+        form = ReservationForm(initial = {
+            'facility': facility_form,
+            'user': user,
+            'reservation_date': '{}/{}/{}'.format(rday, rmonth, ryear),
+        })
+
+        ctx = {
+            'form': form
+        }
+
+        return render(request, "sportchallenger/reservation.html", ctx)
+
+    def post(self, request, pk, ryear, rmonth, rday):
+        day = int(rday)
+        month = int(rmonth)
+        year = int(ryear)
+        booking = datetime.date(year, month, day)
+        r_number = Reservation.objects.create(reservation_date=booking)
+        facility_object = SportFacility.objects.get(id=pk)
+        user_object = request.user
+        myuser = MyUser.objects.get(user = user_object) #albo get or create jeśli do usera nie ma przypisanego myusera
+        r_number.facility = facility_object
+        r_number.user = myuser
+        r_number.save()
+
+        return render(request, "sportchallenger/thanks.html")
+
+class UserDetailsView(View):
+    def get(self, request):
+        user_object = request.user
+        myuser = MyUser.objects.get(user = user_object)
+        booking_old = Reservation.objects.all().filter(reservation_date__lt=datetime.date.today()).filter(user = myuser)
+        booking_new = Reservation.objects.all().filter(reservation_date__gte=datetime.date.today()).filter(user=myuser)
+        print(booking_old)
+        ctx = {
+            'user': user_object,
+            'myuser': myuser,
+            'booking_old': booking_old,
+            'booking_new': booking_new
+        }
+        return render(request, "sportchallenger/user_details.html", ctx)
+
+class AddUserView(View):
+    def get(self, request):
+        base_form = NewUserForm
+        extended_form = NewUserForm2
+        ctx = {
+            'base_form': base_form,
+            'extended_form': extended_form
+        }
+        return render(request, "sportchallenger/newuser_form.html", ctx)

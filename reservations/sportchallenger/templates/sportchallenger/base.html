@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Sport Challenger </title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="/static/custom.css" >
+    <link rel="stylesheet" type="text/css" href="/static/calendar_css.css" >
+    <script src="/static/js/calendar.js" type="text/javascript"> </script>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+</head>
+<body>
+    <div class="topmenu">
+        <p class="navbar-right logout">
+            Signed in as: {{ request.user.username }},
+            <a class="menuspace" href="{% url 'site-logout' %}?next=/login">LOGOUT</a>
+        </p>
+    </div>
+    <div class="base-headline-title">
+        <h3>
+            {% block title %}
+
+            {% endblock %}
+        </h3>
+    </div>
+
+    <div class="content-block">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+    {% bootstrap_javascript %}
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    {% block content_js %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends 'sportchallenger/base.html' %}
+
+{% block content %}
+    <h1> {{ user.username }} </h1>
+    <div> <img src = '/{{ myuser.photo }}'> </div>
+    <p>NICKNAME: {{ myuser.nickname }} </p>
+    <p>EMAIL: {{ user.email }} </p>
+    <p>DATA ZAŁOŻENIA KONTA: {{ myuser.creation_date }} </p>
+    <div>AKTUALNE REZERWACJE:
+        <table>
+            <tr>
+                <th> Data rezerwacji </th>
+                <th> Obiekt </th>
+            </tr>
+            {% for event in booking_new%}
+                <tr>
+                    <td> {{ event.reservation_date }} </td>
+                    <td> {{ event.facility }} </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+    <div>HISTORIA:
+        <table>
+            <tr>
+                <th> Data rezerwacji </th>
+                <th> Obiekt </th>
+            </tr>
+            {% for event in booking_old%}
+                <tr>
+                    <td> {{ event.reservation_date }} </td>
+                    <td> {{ event.facility }} </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+{% endblock %}
+
+{% block title %} Szczegóły użytkownika {% endblock %}

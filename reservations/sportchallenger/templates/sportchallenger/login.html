@@ -1,0 +1,24 @@
+{% extends 'sportchallenger/base.html' %}
+
+{% block title %}
+    Sport Challenger
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            Login form
+        </div>
+        <div class="panel-body">
+
+            <p><b> </b></p>
+            <div>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="save">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

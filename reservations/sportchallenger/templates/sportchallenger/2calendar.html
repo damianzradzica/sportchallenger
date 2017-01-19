@@ -1,0 +1,30 @@
+{% extends 'sportchallenger/base.html' %}
+
+{% block content %}
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+
+<div class="month">
+  <ul>
+    <li>
+      <span style="font-size:18px"> {{ month }} - {{ year }} </span>
+    </li>
+  </ul>
+</div>
+
+<ul class="days">
+    {% for day in list %}
+
+        <li>
+            <button type = 'button'>
+            <a href='{% url 'reservation' facility.id day.year day.month day.day %}'> {{ day }} </a>
+            </button>
+        </li>
+
+    {% endfor %}
+
+</ul>
+{% endblock %}
+
+{% block title %} Dostępność {% endblock %}
