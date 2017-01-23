@@ -14,8 +14,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 import datetime
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from sportchallenger.forms import LoginForm, MonthForm, ReservationForm, NewUserForm
 from sportchallenger.models import Reservation, SportFacility, KINDS, SPORTS, MyUser
+from sportchallenger.serializers import ReservationSerializer
+
 # Create your views here.
 
 
@@ -177,5 +181,11 @@ class AddUserView(View):
         else:
             return HttpResponse('form is invalid')
         return render(request, "sportchallenger/thanks_user.html")
+
+class LoadReservation(APIView):
+    def get(self, request, format = None):
+        reservations = Reservation.objects.all()
+        serializer = ReservationSerializer(reservations, many=True, context={'request': request})
+        return Response(serializer.data)
 
 

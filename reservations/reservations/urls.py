@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from sportchallenger.views import LoginView, MainView, FacilityView, ReservationView, UserDetailsView, AddUserView
+from sportchallenger.views import LoginView, MainView, FacilityView, ReservationView, UserDetailsView, AddUserView, \
+    LoadReservation
 from django.contrib import admin
 from django.contrib.auth.views import logout_then_login
 
@@ -27,5 +28,6 @@ urlpatterns = [
     url(r'^facility/(?P<pk>(\d)+)/(?P<ryear>(\d)+)/(?P<rmonth>(\d)+)/(?P<rday>(\d)+)$', ReservationView.as_view(), \
         name = 'reservation'),
     url(r'^user$', UserDetailsView.as_view(), name = 'user_details'),
-    url(r'^newuser$', AddUserView.as_view(), name = 'new_user')
+    url(r'^newuser$', AddUserView.as_view(), name = 'new_user'),
+    url(r'^reservationlist$', LoadReservation.as_view(), name='reservation_list'),
 ]

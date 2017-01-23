@@ -13,7 +13,7 @@
     {% for obj in facility %}
     <table>
         <tr>
-            <td rowspan = 4>  <img src = '/{{ obj.photos }} '> </td>
+            <td rowspan = 4>  <img class = 'image' src = '/{{ obj.photos }} '> </td>
             <td> <strong> <a href = '{% url 'facility_details' obj.id %}'> {{ obj.name }} </a> </strong> </td>
         </tr>
         <tr>
