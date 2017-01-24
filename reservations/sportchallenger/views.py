@@ -114,12 +114,15 @@ class FacilityView(View):
 
 class ReservationView(View):
     def get(self, request, pk, ryear, rmonth, rday):
-        facility_form = SportFacility.objects.get(id = pk).name
+        data = SportFacility.objects.get(id = pk)
+        facility_form = data.name
+        facility_price = data.price
         user = request.user.username
         form = ReservationForm(initial = {
             'facility': facility_form,
             'user': user,
             'reservation_date': '{}/{}/{}'.format(rday, rmonth, ryear),
+            'price': facility_price
         })
 
         ctx = {
@@ -189,3 +192,15 @@ class LoadReservation(APIView):
         return Response(serializer.data)
 
 
+class AddFacilityView(CreateView):
+        model = SportFacility
+        fields = '__all__'
+
+class UpdateFacilityView(UpdateView):
+    model = SportFacility
+    fields = '__all__'
+    template_name_suffix = '_update_form'
+
+class DeleteFacilityView(DeleteView):
+    model = SportFacility
+    success_url = 'main_page'

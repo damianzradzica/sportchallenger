@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from sportchallenger.views import LoginView, MainView, FacilityView, ReservationView, UserDetailsView, AddUserView, \
-    LoadReservation
+    LoadReservation, AddFacilityView, UpdateFacilityView, DeleteFacilityView
 from django.contrib import admin
 from django.contrib.auth.views import logout_then_login
 
@@ -29,5 +29,8 @@ urlpatterns = [
         name = 'reservation'),
     url(r'^user$', UserDetailsView.as_view(), name = 'user_details'),
     url(r'^newuser$', AddUserView.as_view(), name = 'new_user'),
-    url(r'^reservationlist$', LoadReservation.as_view(), name='reservation_list'),
+    url(r'^reservationlist$', LoadReservation.as_view(), name='reservation_list'), #javascript, wprowadzenie użycia
+    url(r'^newfacility$', AddFacilityView.as_view(), name = 'new_facility'), #wprowadzenie użycia
+    url(r'^updatefacility/(?P<pk>(\d)+)$', UpdateFacilityView.as_view(), name = 'update_facility'), #wprowadzenie użycia
+    url(r'^deletefacility/(?P<pk>(\d)+)$', DeleteFacilityView.as_view(), name = 'delete_facility'), #wprowadzenie użycia
 ]

@@ -1,29 +1,30 @@
 {% extends 'sportchallenger/base.html' %}
 
 {% block content %}
-    <p class="navbar-right">
-            {% if user.is_authenticated %}
-                <a class="menuspace" href="{% url 'user_details' %}"> KONTO </a>
-            {% else %}
-                <a class="menuspace" href="{% url 'new_user' %}"> ZAŁÓŻ KONTO </a>
-            {% endif %}
-    </p>
-
-    <h1>Obiekty sportowe</h1>
     {% for obj in facility %}
-    <table>
+    <!--<div class="col-mid-4">-->
+        <!--<img class="img-thumbnail picture-tag" src='/{{ obj.photos }} '>-->
+    <!--</div>-->
+    <!--<div class="col-mid-8">-->
+        <!--<p> <strong> <a href = '{% url 'facility_details' obj.id %}'> {{ obj.name }} </a> </strong> </p>-->
+        <!--<p> {{ obj.city }}, ul. {{ obj.street }} </p>-->
+        <!--<p> {{ obj.kind }} </p>-->
+        <!--<p> Cena: {{ obj.price }} </p>-->
+    <!--</div>-->
+
+    <table class="">
         <tr>
-            <td rowspan = 4>  <img class = 'image' src = '/{{ obj.photos }} '> </td>
-            <td> <strong> <a href = '{% url 'facility_details' obj.id %}'> {{ obj.name }} </a> </strong> </td>
+            <td class="picture-tag" rowspan = 4>  <img class="img-thumbnail" src='/{{ obj.photos }} '> </td>
+            <td> <h1> <a class="facility-link" href = '{% url 'facility_details' obj.id %}'> {{ obj.name }} </a> </h1> </td>
         </tr>
         <tr>
-            <td> {{ obj.city }}, ul. {{ obj.street }} </td>
+            <td> <strong> Adres: </strong> {{ obj.city }}, ul. {{ obj.street }} </td>
         </tr>
         <tr>
-            <td> {{ obj.kind }} </td>
+            <td> <strong> Rodzaj obiektu: </strong> {{ obj.kind }} </td>
         </tr>
         <tr>
-            <td> Cena: {{ obj.price }} </td>
+            <td> <strong> Cena: </strong> {{ obj.price }} za dzień </td>
         </tr>
     </table>
     <hr>
@@ -31,4 +32,4 @@
 
 {% endblock %}
 
-{% block title %} Main page {% endblock %}
+{% block title %} Obiekty sportowe {% endblock %}

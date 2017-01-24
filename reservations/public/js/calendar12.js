@@ -1,10 +1,8 @@
-$(document).ready(function() {
+$(document).ready(function(event) {
 // tu nasz kod
-var $days = $('.days').find('li').find('button')
+var $days = $('.days').find('li').find('button');
 
-});
-
-$days.one('click', function () {
+$days.one('click', function (event) {
 		$(this).toggleClass('clicked');
 	});
 });

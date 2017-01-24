@@ -76,3 +76,11 @@ body {font-family: Verdana, sans-serif;}
     color: white;
     background-color: green;
 }
+
+.unavailable {
+    color: white;
+    background-color: red;
+    pointer-events: none;
+    cursor: default;
+    /* dwa ostatnie są do odlinkowania */
+}

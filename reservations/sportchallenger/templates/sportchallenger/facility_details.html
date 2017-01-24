@@ -2,16 +2,36 @@
 
 {% block content %}
     <h1> {{ facility.name }} </h1>
-    <div> <img class = 'image' src = '/{{ photo }}'> </div>
-    <p>ADRES: {{ facility.city }}, {{ facility.street }} </p>
-    <p>RODZAJ OBIEKTU: {{ kind }} </p>
-    <p>DYSCYPLINY: {{ sports }} </p>
-    <p>OPIS: {{ facility.description }} </p>
-    <p>CENA: {{ facility.price }} ZŁ / GODZ. </p>
-
-    <form action = '' method = 'POST'>
+    <div class="col-mid-6">
+        <img class="img-thumbnail" src = '/{{ photo }}'>
+    </div>
+    <div class="col-mid-6">
+        <table class="table table-bordered">
+            <tr>
+                <td> <strong> ADRES: </strong> </td>
+                <td> {{ facility.city }}, {{ facility.street }} </td>
+            </tr>
+            <tr>
+                <td> <strong> RODZAJ OBIEKTU: </strong> </td>
+                <td> {{ kind }} </td>
+            </tr>
+            <tr>
+                <td> <strong> DYSCYPLINY: </strong> </td>
+                <td> {{ sports }}  </td>
+            </tr>
+            <tr>
+                <td> <strong> OPIS: </strong> </td>
+                <td> {{ facility.description }} </td>
+            </tr>
+            <tr>
+                <td> <strong> CENA: </strong>  </td>
+                <td> {{ facility.price }} ZŁ / DZIEŃ </td>
+            </tr>
+        </table>
+    </div>
+    <form class='formtype-2' action = '' method = 'POST'>
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_table }}
         <input type="submit" value = 'SPRAWDŹ DOSTĘPNOŚĆ'>
     </form>
 

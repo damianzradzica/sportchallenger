@@ -1,12 +1,11 @@
-$(document).ready(function() {
+$(document).ready(function(event) {
 
-var $days = $('.days').find('li').find('button')
+var $days = $('.days').find('li').find('button');
 
-});
-
-$days.one('click', function () {
+$days.one('click', function(event) {
 		$(this).toggleClass('clicked');
 	});
+});
 
 //$.ajax({url: "http://127.0.0.1:8000/reservationlist"}).done(function(json) {
 // Ważne info!!! Dana z ajaxa są zapisane w zmiennej json(argument funkcji w done powyżej). Na tej zmiennej

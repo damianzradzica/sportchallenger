@@ -42,6 +42,10 @@ class ReservationForm(forms.Form):
         label='Data rezerwacji',
         disabled=True
     )
+    price = forms.CharField(
+        label='Cena',
+        disabled=True
+    )
 
 class NewUserForm(forms.Form):
     username = forms.CharField(
