@@ -18,7 +18,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from sportchallenger.forms import LoginForm, MonthForm, ReservationForm, NewUserForm
 from sportchallenger.models import Reservation, SportFacility, KINDS, SPORTS, MyUser
-from sportchallenger.serializers import ReservationSerializer
+from sportchallenger.serializers import ReservationSerializer, FacilitySerializer
 
 # Create your views here.
 
@@ -191,6 +191,11 @@ class LoadReservation(APIView):
         serializer = ReservationSerializer(reservations, many=True, context={'request': request})
         return Response(serializer.data)
 
+class LoadFacility(APIView):
+    def get(self, request, format = None):
+        facilities = SportFacility.objects.all()
+        serializer = FacilitySerializer(facilities, many=True, context={'request': request})
+        return Response(serializer.data)
 
 class AddFacilityView(CreateView):
         model = SportFacility
