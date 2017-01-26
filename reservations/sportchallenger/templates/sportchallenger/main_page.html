@@ -1,34 +1,55 @@
 {% extends 'sportchallenger/base.html' %}
 
-{% block content %}
-    {% for obj in facility %}
-    <!--<div class="col-mid-4">-->
-        <!--<img class="img-thumbnail picture-tag" src='/{{ obj.photos }} '>-->
-    <!--</div>-->
-    <!--<div class="col-mid-8">-->
-        <!--<p> <strong> <a href = '{% url 'facility_details' obj.id %}'> {{ obj.name }} </a> </strong> </p>-->
-        <!--<p> {{ obj.city }}, ul. {{ obj.street }} </p>-->
-        <!--<p> {{ obj.kind }} </p>-->
-        <!--<p> Cena: {{ obj.price }} </p>-->
-    <!--</div>-->
+{% block static %}
+<script
+    src="http://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+<script src="/static/js/facilities.js" type="text/javascript"> </script>
+{% endblock %}
 
-    <table class="">
-        <tr>
-            <td class="picture-tag" rowspan = 4>  <img class="img-thumbnail" src='/{{ obj.photos }} '> </td>
-            <td> <h1> <a class="facility-link" href = '{% url 'facility_details' obj.id %}'> {{ obj.name }} </a> </h1> </td>
-        </tr>
-        <tr>
-            <td> <strong> Adres: </strong> {{ obj.city }}, ul. {{ obj.street }} </td>
-        </tr>
-        <tr>
-            <td> <strong> Rodzaj obiektu: </strong> {{ obj.kind }} </td>
-        </tr>
-        <tr>
-            <td> <strong> Cena: </strong> {{ obj.price }} za dzień </td>
-        </tr>
-    </table>
-    <hr>
+{% block content %}
+    <div class="col-mid-12">
+        <table id="search">
+            <tr>
+                <td class="facility-table"> <input type="text" name="facility_name" placeholder="Nazwa obiektu"> </td>
+                <td class="facility-table"> <input type="number" name="price_from" placeholder="Cena od"> </td>
+                <td class="facility-table" rowspan=2>
+                    <form class="kind">
+                        <input type="checkbox" value="1"> Hala wielofukcyjna
+                        <input class="kind" type="checkbox" value="2"> Boisko piłkarskie
+                        <input class="kind" type="checkbox" value="3"> Pływalnia
+                        <input class="kind" type="checkbox" value="4"> Obiekt lekkoatletyczny
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td class="facility-table"> <input type="text" name="city" placeholder="Miasto"> </td>
+                <td class="facility-table"> <input type="number" name="price_to" placeholder="Cena do"> </td>
+            </tr>
+        </table>
+        <hr>
+    </div>
+    <div class="col-mid-12">
+        {% for obj in facility %}
+        <table class="">
+            <tr>
+                <td class="picture-tag" rowspan = 4>  <img class="img-thumbnail" src='/{{ obj.photos }} '> </td>
+                <td> <h1> <a class="facility-link" href = '{% url 'facility_details' obj.id %}'> {{ obj.name }} </a> </h1> </td>
+            </tr>
+            <tr>
+                <td> <strong> Adres: </strong> {{ obj.city }}, ul. {{ obj.street }} </td>
+            </tr>
+            <tr>
+                <td> <strong> Rodzaj obiektu: </strong> {{ obj.kind }} </td>
+            </tr>
+            <tr>
+                <td> <strong> Cena: </strong> {{ obj.price }} za dzień </td>
+            </tr>
+        </table>
+        <hr>
     {% endfor %}
+    </div>
 
 {% endblock %}
 

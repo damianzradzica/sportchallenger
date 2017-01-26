@@ -3,6 +3,10 @@
     width: 33%;
 }
 
+.facility-table {
+    background-color: #428e97;
+}
+
 table td {
     background-color: #a09d92;
     margin: 12px 12px 12px 12px;
@@ -33,3 +37,19 @@ input {
     height: 30px;
     display:inline-block;
 }
+
+.form-2 label {
+    width:auto;
+    height: 30px;
+}
+
+.kind {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+}
+
+#search {
+    margin: auto;
+}
+
