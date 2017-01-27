@@ -53,3 +53,7 @@ input {
     margin: auto;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
