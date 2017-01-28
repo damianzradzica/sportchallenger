@@ -13,24 +13,33 @@ $(document).ready(function() {
     var $search_price_to= $('.search-price-to');
     var $search_kind = $('.search-kind').find('input:checkbox:checked');
 
-
-    $search_name.on('change', function(event) {
-        $name.each(function() {
-            if ($search_name.text().indexOf($(this)) == -1) {
-                $(this).parent().parent().parent().parent().toggleClass('hidden');
-        }
+    $search_name.keyup(function(){
+        var valThis = $(this).val();
+        $name.each(function(){
+            var text = $(this).text().toLowerCase();
+            var element = $(this).parent().parent().parent().parent();
+            (text.indexOf(valThis.toLowerCase()) > -1) ? element.show() : element.hide();
         });
-
     });
 
-    console.log($name.text());
-    console.log($city.text());
-    console.log($price.text());
-    console.log($kind.text());
+    $search_city.keyup(function(){
+        var valThis = $(this).val();
+        $city.each(function(){
+            var text = $(this).text().toLowerCase();
+            var element = $(this).parent().parent().parent().parent();
+            (text.indexOf(valThis.toLowerCase()) > -1) ? element.show() : element.hide();
+        });
+    });
 
-    console.log($search_name.text());
-    console.log($search_city.text());
-    console.log($search_price_from.text());
-    console.log($search_price_to.text());
-    console.log($search_kind.text());
+
+//    console.log($name.text());
+//    console.log($city.text());
+//    console.log($price.text());
+//    console.log($kind.text());
+//
+//    console.log($search_name.html());
+//    console.log($search_city.text());
+//    console.log($search_price_from.text());
+//    console.log($search_price_to.text());
+//    console.log($search_kind.text());
 });
