@@ -12,6 +12,7 @@ $(document).ready(function() {
     var $search_price_from = $('.search-price-from');
     var $search_price_to= $('.search-price-to');
     var $search_kind = $('.kind-check');
+    var $price_searcher = $('.price-searcher');
 
     $search_name.keyup(function(){
         var valThis = $(this).val();
@@ -41,13 +42,50 @@ $(document).ready(function() {
         var valThis = selected.replace(/\s+/g, '');
         $kind.each(function(){
             var text = $(this).text().toLowerCase().replace('rodzaj obiektu:','').replace(/\s+/g, '');
-            console.log(valThis);
-            console.log(text);
             var element = $(this).parent().parent();
             (valThis.toLowerCase().includes(text) == true) ? element.show() : element.hide();
         });
     });
 
+    $price_searcher.keyup(function(){
+        var valFrom = parseInt($search_price_from.val(), 10);
+        var valTo = parseInt($search_price_to.val(), 10);
+        $price.each(function(){
+            var text = parseInt($(this).text().match(/\d+/)[0], 10);
+            var external = parseInt($search_price_to.val(), 10);
+            console.log(valFrom);
+            console.log(valTo);
+            console.log(text);
+            var element = $(this).parent().parent();
+            if ($.isNumeric(valFrom) == false && $.isNumeric(valTo) == true) {
+                (text<=valTo) ? element.show() : element.hide();
+            }
+            else if ($.isNumeric(valFrom) == true && $.isNumeric(valTo) == false) {
+                (text>=valFrom) ? element.show() : element.hide();
+            }
+            else if ($.isNumeric(valFrom) == true && $.isNumeric(valTo) == true) {
+                (valTo>=text && text>=valFrom) ? element.show() : element.hide();
+            }
+            else {
+                (1>=0) ? element.show() : element.hide();
+            };
+        });
+    });
+
+//    $search_price_to.keyup(function(){
+//        var valThis = parseInt($(this).val(), 10);
+//        $price.each(function(){
+//            var text = parseInt($(this).text().match(/\d+/)[0], 10);
+//            var external = parseInt($search_price_from.val(), 10);
+//            if ($.isNumeric(external) == false) {
+//                external = -1;
+//            };
+//            console.log(valThis);
+//            console.log(text);
+//            var element = $(this).parent().parent();
+//            ($.isNumeric(valThis) == false || text<=valThis) ? element.show() : element.hide();
+//        });
+//    });
 
 //    var check_elements = [];
 //    check_elements.push($('.kind-check'));
