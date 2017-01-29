@@ -78,9 +78,12 @@ class Reservation(models.Model):
     def __str__(self):
         return '{}'.format(self.reservation_date)
 
-
-
-
-
+# class Basket(models.Model):
+#     user = models.ForeignKey(MyUser, related_name='user-basket', null=True, blank=True)
+#     reservation = models.ForeignKey(Reservation, related_name='reservation-field', null=True, blank=True)
+#     creation_date = models.DateTimeField(auto_now_add=True)
+#
+#     def __str__(self):
+#         return self.creation_date
 
 
