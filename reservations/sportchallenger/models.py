@@ -86,4 +86,4 @@ class Reservation(models.Model):
 #     def __str__(self):
 #         return self.creation_date
 
-
+# zmiany można wprowadzić w ten sposób albo danymi w sesji
