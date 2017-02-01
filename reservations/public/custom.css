@@ -134,3 +134,8 @@ body {font-family: Verdana, sans-serif;}
     color: white;
     background-color: #c1f85c;
 }
+
+.control-change {
+    color: black;
+    background-color: red;
+}
