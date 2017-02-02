@@ -3,6 +3,16 @@
     width: 33%;
 }
 
+.user-image {
+    height: 150px;
+    max_width: 150px;
+}
+
+.user-td {
+    height: 170px;
+    max_width: 170px;
+}
+
 .facility-table {
     background-color: #428e97;
 }

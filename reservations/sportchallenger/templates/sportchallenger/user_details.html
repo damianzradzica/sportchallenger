@@ -1,42 +1,54 @@
 {% extends 'sportchallenger/base.html' %}
 
 {% block content %}
-    <h1> {{ user.username }} </h1>
-    <div> <img class = 'image' src = '/{{ myuser.photo }}'> </div>
-    <p>NICKNAME: {{ myuser.nickname }} </p>
-    <p>EMAIL: {{ user.email }} </p>
-    <p>DATA ZAŁOŻENIA KONTA: {{ myuser.creation_date }} </p>
-    <div>AKTUALNE REZERWACJE:
-        <table>
-            <tr>
-                <th> Data rezerwacji </th>
-                <th> Obiekt </th>
-            </tr>
-            {% for event in booking_new%}
-                <tr>
-                    <td> {{ event.reservation_date }} </td>
-                    <td> {{ event.facility }} </td>
-                </tr>
-            {% endfor %}
-        </table>
-
-    </div>
-    <div>HISTORIA:
-        <table>
-            <tr>
-                <th> Data rezerwacji </th>
-                <th> Obiekt </th>
-            </tr>
-            {% for event in booking_old%}
-                <tr>
-                    <td> {{ event.reservation_date }} </td>
-                    <td> {{ event.facility }} </td>
-                </tr>
-            {% endfor %}
-        </table>
-
-    </div>
-
+<h1> <strong> {{ user.username }} </strong>  </h1>
+    <table class="table table-striped">
+        <tr>
+            <td class ='user-td' rowspan="4"> <img class='user-image' src = '/{{ myuser.photo }}'> </td>
+            <td> <strong> NICKNAME: </strong> </td>
+            <td> {{ myuser.nickname }} </td>
+        </tr>
+        <tr>
+            <td> <strong> IMIĘ I NAZWISKO: </strong> </td>
+            <td> {{ user.first_name }} {{ user.last_name }}</td>
+        </tr>
+        <tr>
+            <td> <strong> EMAIL: </strong> </td>
+            <td> {{ user.email }} </td>
+        </tr>
+        <tr>
+            <td> <strong> DATA ZAŁOŻENIA KONTA: </strong>  </td>
+            <td> {{ myuser.creation_date }} </td>
+        </tr>
+    </table>
+<div> <strong> AKTUALNE REZERWACJE: </strong>
+    <table class="table table-bordered">
+        <tr>
+            <th> Data rezerwacji </th>
+            <th> Obiekt </th>
+        </tr>
+        {% for event in booking_new%}
+        <tr>
+            <td> {{ event.reservation_date }} </td>
+            <td> {{ event.facility }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div> <strong> HISTORIA: </strong>
+    <table class="table table-striped">
+        <tr>
+            <th> Data rezerwacji </th>
+            <th> Obiekt </th>
+        </tr>
+        {% for event in booking_old%}
+        <tr>
+            <td> {{ event.reservation_date }} </td>
+            <td> {{ event.facility }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}
 
 {% block title %} Szczegóły użytkownika {% endblock %}
