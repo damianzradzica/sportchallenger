@@ -61,7 +61,7 @@ class MainView(View):
         return render(request, "sportchallenger/main_page.html", {'facility': list,
                                                                   'user': user })
 
-class FacilityView(View):
+class FacilityView(LoginRequiredMixin, View):
     def get(self, request, pk):
         facility = SportFacility.objects.get(id = pk)
         form = MonthForm()
@@ -112,7 +112,7 @@ class FacilityView(View):
         return render(request, 'sportchallenger/2calendar.html', ctx)
 
 
-class ReservationView(View):
+class ReservationView(LoginRequiredMixin, View):
     def get(self, request, pk, ryear, rmonth, rday):
         data = SportFacility.objects.get(id = pk)
         facility_form = data.name
@@ -146,7 +146,7 @@ class ReservationView(View):
 
         return render(request, "sportchallenger/thanks.html")
 
-class UserDetailsView(View):
+class UserDetailsView(LoginRequiredMixin, View):
     def get(self, request):
         user_object = request.user
         myuser = MyUser.objects.get(user = user_object)
@@ -197,15 +197,15 @@ class LoadFacility(APIView):
         serializer = FacilitySerializer(facilities, many=True, context={'request': request})
         return Response(serializer.data)
 
-class AddFacilityView(CreateView):
+class AddFacilityView(LoginRequiredMixin, CreateView):
         model = SportFacility
         fields = '__all__'
 
-class UpdateFacilityView(UpdateView):
+class UpdateFacilityView(LoginRequiredMixin, UpdateView):
     model = SportFacility
     fields = '__all__'
     template_name_suffix = '_update_form'
 
-class DeleteFacilityView(DeleteView):
+class DeleteFacilityView(LoginRequiredMixin, DeleteView):
     model = SportFacility
     success_url = 'main_page'
