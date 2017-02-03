@@ -1,8 +1,14 @@
 from django import forms
 from django.contrib.auth.models import User
 from sportchallenger.models import MONTHS, Reservation, MyUser
+from datetime import date
+from django.core.exceptions import ValidationError
 
 
+
+def validate_date(value):
+    if value < date.today().year:
+        raise ValidationError("Wskazana data: %s już minęła. Wprowadź inną datę." %value)
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -21,10 +27,12 @@ class LoginForm(forms.Form):
 
 class MonthForm(forms.Form):
     year = forms.IntegerField(
-        initial = 2017,
-        label='Rok'
+        initial = date.today().year,
+        label='Rok',
+        validators=[validate_date]
     )
     month = forms.ChoiceField(
+        initial=date.today().month,
         choices = MONTHS,
         label = 'Miesiąc'
     )
