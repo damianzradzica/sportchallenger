@@ -37,12 +37,17 @@
                     <li role="presentation"><a href="#"> Kontakt </a></li>
                     <li role="presentation"><a href="#"> O nas </a></li>
                     {% if user.is_authenticated %}
+                    {% if perms.sportchallenger.add_sportfacility %}
+                    <li role="presentation"><a href="{% url 'new_facility' %}"> Dodaj obiekt </a></li>
+                    {% endif %}
                     <li role="presentation"><a href="{% url 'user_details' %}"> Twoje konto </a></li>
                     <li role="presentation"><a href="{% url 'site-logout' %}?next=/login"> LOGOUT </a></li>
                     {% else %}
                     <li role="presentation"><a href="{% url 'site-logout' %}?next=/login"> LOGIN </a></li>
                     <li role="presentation"><a href="{% url 'new_user' %}"> ZAŁÓŻ KONTO </a></li>
                     {% endif %}
+
+
                 </ul>
             </div>
         </div>

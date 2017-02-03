@@ -209,8 +209,9 @@ class UpdateFacilityView(PermissionRequiredMixin, UpdateView):
     permission_required = 'sportchallenger.change_sportfacility'
     fields = '__all__'
     template_name_suffix = '_update_form'
+    success_url = reverse_lazy('main_page')
 
 class DeleteFacilityView(PermissionRequiredMixin, DeleteView):
     model = SportFacility
     permission_required = 'sportchallenger.delete_sportfacility'
-    success_url = 'main_page'
+    success_url = reverse_lazy('main_page')

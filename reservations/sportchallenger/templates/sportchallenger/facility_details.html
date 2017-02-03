@@ -2,6 +2,12 @@
 
 {% block content %}
     <h1> {{ facility.name }} </h1>
+    {% if perms.sportchallenger.change_sportfacility %}
+    <p> <a href="{% url 'update_facility' facility.id %}"> Modyfikuj obiekt </a> </p>
+    {% endif %}
+    {% if perms.sportchallenger.delete_sportfacility %}
+    <p> <a href="{% url 'delete_facility' facility.id %}"> Usuń obiekt </a> </p>
+    {% endif %}
     <div>
         <img class="picture-tag img-thumbnail" src = '/{{ photo }}'>
         <table class="table table-bordered">
