@@ -10,7 +10,7 @@ from django.views.generic import UpdateView
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import redirect
 import datetime
 from rest_framework.views import APIView
@@ -199,15 +199,18 @@ class LoadFacility(APIView):
         serializer = FacilitySerializer(facilities, many=True, context={'request': request})
         return Response(serializer.data)
 
-class AddFacilityView(LoginRequiredMixin, CreateView):
+class AddFacilityView(PermissionRequiredMixin, CreateView):
         model = SportFacility
+        permission_required = 'sportchallenger.add_sportfacility'
         fields = '__all__'
 
-class UpdateFacilityView(LoginRequiredMixin, UpdateView):
+class UpdateFacilityView(PermissionRequiredMixin, UpdateView):
     model = SportFacility
+    permission_required = 'sportchallenger.change_sportfacility'
     fields = '__all__'
     template_name_suffix = '_update_form'
 
-class DeleteFacilityView(LoginRequiredMixin, DeleteView):
+class DeleteFacilityView(PermissionRequiredMixin, DeleteView):
     model = SportFacility
+    permission_required = 'sportchallenger.delete_sportfacility'
     success_url = 'main_page'
