@@ -88,7 +88,10 @@ class FacilityView(LoginRequiredMixin, View):
         elif month_info in short_months:
             days = 30
         elif month_info ==2:
-            days = 28
+            if year % 4 == 0:
+                days = 29
+            else:
+                days = 28
 
         counter = 1
         list = []
