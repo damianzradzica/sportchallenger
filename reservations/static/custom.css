@@ -71,3 +71,16 @@ input {
     disabled: True;
     background-color: blue;
 }
+
+#logo {
+    float: left;
+    margin: 12px;
+}
+
+#about {
+    text-align: justify;
+    text-indent: 50px;
+    line-height: 1.8;
+    font-family: "Verdana", Times, serif;
+    font-size: 16px;
+}

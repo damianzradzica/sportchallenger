@@ -215,3 +215,11 @@ class DeleteFacilityView(PermissionRequiredMixin, DeleteView):
     model = SportFacility
     permission_required = 'sportchallenger.delete_sportfacility'
     success_url = reverse_lazy('main_page')
+
+class ContactView(View):
+    def get(self, request):
+        return render(request, "sportchallenger/contact.html")
+
+class AboutView(View):
+    def get(self, request):
+        return render(request, "sportchallenger/about.html")
