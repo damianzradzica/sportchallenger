@@ -84,3 +84,8 @@ input {
     font-family: "Verdana", Times, serif;
     font-size: 16px;
 }
+
+#logotype {
+    text-align: center;
+    float: center;
+}
