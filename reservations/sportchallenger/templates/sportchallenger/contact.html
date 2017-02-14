@@ -10,29 +10,11 @@
 {% block content %}
 <div class="col-mid-12">
     <div id="map"></div>
-    <script>
-        function initMap() {
-            var myLatLng = {lat: -25.363, lng: 131.044};
-
-            // Create a map object and specify the DOM element for display.
-            var map = new google.maps.Map(document.getElementById('map'), {
-              center: myLatLng,
-              scrollwheel: false,
-              zoom: 4
-            });
-
-            // Create a marker and set its position.
-            var marker = new google.maps.Marker({
-              map: map,
-              position: myLatLng,
-              title: 'Hello World!'
-            });
-         }
-    </script>
-    <!--Google API: AIzaSyAl43muY7eMS_DrDZRzeDzXyEoT2AT-1X0-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl43muY7eMS_DrDZRzeDzXyEoT2AT-1X0&callback=initMap"
-            async defer>
-    </script>
+        <!--Google API: AIzaSyAl43muY7eMS_DrDZRzeDzXyEoT2AT-1X0-->
+         <iframe src="//www.google.com/maps/embed/v1/place?q=Harrods,Brompton%20Rd,%20UK
+         &zoom=17
+        &key=AIzaSyAl43muY7eMS_DrDZRzeDzXyEoT2AT-1X0">
+        </iframe>
 </div>
 
 <h2> Strona w przygotowaniu </h2>
