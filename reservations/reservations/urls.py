@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from sportchallenger.views import LoginView, MainView, FacilityView, ReservationView, UserDetailsView, AddUserView, \
-    LoadReservation, LoadFacility, AddFacilityView, UpdateFacilityView, DeleteFacilityView, ContactView, AboutView
+    LoadReservation, LoadFacility, AddFacilityView, UpdateFacilityView, DeleteFacilityView, ContactView, AboutView, \
+    LocationView
 from django.contrib import admin
 from django.contrib.auth.views import logout_then_login
 
@@ -36,4 +37,6 @@ urlpatterns = [
     url(r'^deletefacility/(?P<pk>(\d)+)$', DeleteFacilityView.as_view(), name = 'delete_facility'), #wprowadzenie użycia
     url(r'^contact$', ContactView.as_view(), name = 'contact'),
     url(r'^about$', AboutView.as_view(), name = 'about'),
+    url(r'^map$', LocationView.as_view(), name = 'map'),
+
 ]

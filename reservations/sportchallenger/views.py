@@ -223,3 +223,11 @@ class ContactView(View):
 class AboutView(View):
     def get(self, request):
         return render(request, "sportchallenger/about.html")
+
+class LocationView(View):
+    def get(self, request):
+        facilities = SportFacility.objects.all
+        ctx = {
+            'facilities': facilities,
+        }
+        return render(request, "sportchallenger/googlemaps.html", ctx)
