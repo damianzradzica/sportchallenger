@@ -10,6 +10,6 @@ class ReservationSerializer(serializers.ModelSerializer):
 class FacilitySerializer(serializers.ModelSerializer):
     class Meta:
         model = SportFacility
-        fields = ['name', 'kind', 'city', 'price']
+        fields = ['name', 'kind', 'city', 'street', 'price']
 
 
