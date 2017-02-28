@@ -35,8 +35,5 @@ urlpatterns = [
     url(r'^newfacility$', AddFacilityView.as_view(), name = 'new_facility'), #wprowadzenie użycia
     url(r'^updatefacility/(?P<pk>(\d)+)$', UpdateFacilityView.as_view(), name = 'update_facility'), #wprowadzenie użycia
     url(r'^deletefacility/(?P<pk>(\d)+)$', DeleteFacilityView.as_view(), name = 'delete_facility'), #wprowadzenie użycia
-    url(r'^contact$', ContactView.as_view(), name = 'contact'),
     url(r'^about$', AboutView.as_view(), name = 'about'),
-    url(r'^map$', LocationView.as_view(), name = 'map'),
-
 ]

@@ -20,7 +20,7 @@ $(document).ready(function() {
         document.getElementById('submit').addEventListener('click', function() {
             geocodeAddress(geocoder, map);
         });
-      }
+      };
 
      function geocodeAddress(geocoder, resultsMap) {
          for(i=0; i<streetlist.length; i++) {

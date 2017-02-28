@@ -34,7 +34,6 @@
             <div class="col-mid-12">
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="{% url 'main_page' %}"> Obiekty sportowe </a></li>
-                    <li role="presentation"><a href="{% url 'contact' %}"> Kontakt </a></li>
                     <li role="presentation"><a href="{% url 'about' %}"> O nas </a></li>
                     {% if user.is_authenticated %}
                     {% if perms.sportchallenger.add_sportfacility %}
