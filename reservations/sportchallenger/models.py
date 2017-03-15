@@ -57,7 +57,7 @@ class MyUser(models.Model):
 
 class SportFacility(models.Model):
     name = models.CharField(max_length=200)
-    photos = models.ImageField(upload_to = 'static/pictures', blank = True, null = True) #tutaj zapytać jak zrobić galerię
+    photos = models.ImageField(upload_to = 'static/pictures', blank = True, null = True)
     kind = models.IntegerField(choices = KINDS)
     city = models.CharField(max_length=64)
     street = models.CharField(max_length=64)
