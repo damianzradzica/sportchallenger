@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from sportchallenger.views import LoginView, MainView, FacilityView, ReservationView, UserDetailsView, AddUserView, \
-    LoadReservation, LoadFacility, AddFacilityView, UpdateFacilityView, DeleteFacilityView, ContactView, AboutView, \
-    LocationView
+    LoadReservation, LoadFacility, AddFacilityView, UpdateFacilityView, DeleteFacilityView, AboutView
 from django.contrib import admin
 from django.contrib.auth.views import logout_then_login
 
